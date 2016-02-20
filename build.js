@@ -1,6 +1,10 @@
-var NwBuilder = require('nw-builder');
+try {
+  var NwBuilder = require('nw-builder');
+} catch(e) {
+  var NwBuilder = require('./mod/nw-builder');
+}
 var nw = new NwBuilder({
-    files: '{./polymer/dist/**/**,package.json}', // use the glob format
+    files: '{./polymer/dist/**/**,package.json,./node_modules/**/**}', // use the glob format
 //    platforms: ['osx32', 'osx64', 'win32', 'win64','linux32','linux64'],
     platforms: ['linux32','linux64'],
     version: '0.12.3'

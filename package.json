@@ -2,7 +2,7 @@
   "name": "mc-launch",
   "version": "0.0.0",
   "description": "A simple minecraft launcher written in nodeJS",
-  "main": "index.js",
+  "main": "polymer/dist/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,15 +15,14 @@
     "launcher",
     "nw.js"
   ],
-  "main": "polymer/dist/index.html",
   "window": {
-    "toolbar" : false,
+    "toolbar": false,
     "width": 900,
     "height": 700
   },
   "author": "Maciej Krüger <mkg20001@gmail.com>",
   "license": "GPL-3.0",
-  "dependencies": {
+  "devDependencies": {
     "del": "^2.0.2",
     "glob-all": "^3.0.1",
     "gulp": "^3.8.5",
@@ -44,14 +43,16 @@
     "gulp-useref": "^2.1.0",
     "gulp-vulcanize": "^6.0.0",
     "merge-stream": "^1.0.0",
-    "nw-builder": "^2.2.0",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.0.2",
-    "vulcanize": ">= 1.4.2",
-    "web-component-tester": "^4.0.0"
+    "vulcanize": ">= 1.4.2"
   },
   "bugs": {
     "url": "https://github.com/mkg20001/mc-launch/issues"
   },
-  "homepage": "https://github.com/mkg20001/mc-launch#readme"
+  "homepage": "https://github.com/mkg20001/mc-launch#readme",
+  "dependencies": {
+    "nw-builder": "^2.2.0",
+    "prismarine-yggdrasil": "github:prismarinejs/prismarine-yggdrasil"
+  }
 }
