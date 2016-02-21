@@ -9,4 +9,4 @@ node build.js
 mv node_modules production_modules
 mv mod node_modules
 du -h -s build/mc-launch/*
-./build/mc-launch/linux64/mc-launch
+#./build/mc-launch/linux64/mc-launch

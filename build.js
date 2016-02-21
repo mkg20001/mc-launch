@@ -1,6 +1,6 @@
 var NwBuilder = require('nw-builder');
 var nw = new NwBuilder({
-    files: '{./polymer/dist/**/**,package.json,./node_modules/**/**}', // use the glob format
+    files: '{./polymer/dist/**/**,package.json,./node_modules/**/**,./backend/**/**}', // use the glob format
 //    platforms: ['osx32', 'osx64', 'win32', 'win64','linux32','linux64'],
     platforms: ['linux32','linux64'],
     version: '0.12.3'

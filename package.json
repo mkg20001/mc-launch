@@ -59,6 +59,7 @@
     "path": "^0.12.7",
     "prismarine-yggdrasil": "github:prismarinejs/prismarine-yggdrasil",
     "request": "^2.69.0",
+    "sha1": "^1.1.1",
     "uuid": "^2.0.1"
   }
 }
