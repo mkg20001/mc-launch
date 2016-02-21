@@ -1,5 +1,22 @@
+require('nw.gui').Window.get().showDevTools();
 const fs=require("fs");
 const pt=require("path");
+const mk=require("mkdirp");
+const uuid=require("uuid").v4;
+const os=require("os");
+os.homedir=function() {
+  return fs.readFileSync("/tmp/myhome").toString();
+};
+switch(os.platform()) {
+  case "linux":
+    window.mcpath=pt.normalize(os.homedir()+"/.local/share/mc-launch");
+    break;
+  default:
+    window.mcpath=pt.normalize(os.homedir()+"/mc-launch");
+    //break;
+}
+mk(pt.normalize(window.mcpath+"/config"));
+console.log("dir: "+window.mcpath);
 
 window.jsonfile=function config(name,d,ser) {
   if (!d) d={};
@@ -19,7 +36,7 @@ window.jsonfile=function config(name,d,ser) {
 
   function save() {
     fs.writeFile(path,JSON.stringify(c),function(err) {
-      if (err) console.log("save","fail",path,err);
+      if (err) console.log("save","fail",path+" - "+err);
     });
   }
 
@@ -88,8 +105,21 @@ window.auther=function auther(file) {
   const dras=require("prismarine-yggdrasil");
   const conf=new jsonfile(file);
 
-  function auth(user,pw,store) {
-    dras.getSession(user,pw);
+  function auth(user,pw,store,call) {
+    dras.getSession(user,pw,uuid(),false,function(err,res) {
+      if (err) {
+        console.log("auth err: "+err);
+      } else {
+        for (var p in res) {
+          conf.set(p,res[p]);
+        }
+        conf.set("username",user);
+        if (store) {
+          conf.set("alphaToken",new Buffer(pw).toString("base64"));
+        }
+      }
+      call(err,res);
+    });
   }
   return {auth:auth,a:auth,conf:conf,c:conf};
 };
@@ -97,5 +127,5 @@ window.auther=function auther(file) {
 const gui = require('nw.gui');
 
 window.tabs=function(tab) {
-  gui.Window.open(app.baseLoc+"?tab="+tab,{toolbar:false,frame:false});
+  return gui.Window.open(app.baseLoc+"?tab="+tab,{toolbar:false,frame:false});
 };

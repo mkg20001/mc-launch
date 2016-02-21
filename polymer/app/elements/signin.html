@@ -5,12 +5,24 @@
     <style include="shared-styles">
       :host {
         display: block;
+        margin-top:-15px;
+        margin-left:-10px;
       }
     </style>
 
-    <form is="iron-form">
-      <h2 class="page-title">Signin with Mojang account</h2>
+    <h2>Signin with Mojang account</h2>
+    <p style="color:red;font-weight:bold;" hidden="{{!incorrect}}">Incorrect Username or Password, please try again</p>
+    <p style="font-weight:bold;" hidden="{{incorrect}}">Data will be stored only localy on your Computer</p>
+    <form id="sForm" is="iron-form">
+      <paper-input name="username" label="Mojang Username">
+        <iron-icon icon="account-circle" prefix></iron-icon>
+      </paper-input>
+      <paper-input name="password" type="password" label="Mojang Password">
+        <iron-icon icon="communication:vpn-key" prefix></iron-icon>
+      </paper-input><br>
+      <paper-checkbox name="store"> Store Password</paper-checkbox><br>
     </form>
+    <paper-button on-click="doSign" id="signin" raised>Sign In</paper-button><paper-spinner id="spinner"></paper-spinner>
   </template>
 
   <script>
@@ -26,6 +38,30 @@
             value: 'Welcome!',
             notify: true
           }
+        },
+        ready:function() {
+          this.set("incorrect",false);
+        },
+        doSign:function() {
+          this.$.signin.disabled=true;
+          this.$.spinner.active=true;
+          var self=this;
+          var a=new window.auther("token");
+          var d=this.$.sForm.serialize();
+          a.auth(d.username,d.password,d.store,function(err,res) {
+            if (!err) {
+              require('nw.gui').App.closeAllWindows();
+              window.close();
+            } else {
+              self.set("err",err);
+              self.set("incorrect",true);
+              setTimeout(function() {
+                self.set("incorrect",false);
+                self.$.signin.disabled=false;
+                self.$.spinner.active=false;
+              },5000);
+            }
+          });
         }
       });
     })();

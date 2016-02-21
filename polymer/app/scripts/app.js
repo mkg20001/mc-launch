@@ -2,7 +2,8 @@ if (window.location.href.split("?tab=")[1]) {
   var app = document.querySelector('#app');
   var tab=window.location.href.split("?tab=")[1];
   app.addEventListener('dom-change', function() {
-    console.log("open tab:",tab);
+    app.tabs=true;
+    app.tab=tab;
   });
 } else {
 (function(document) {
@@ -29,11 +30,19 @@ if (window.location.href.split("?tab=")[1]) {
   // Listen for template bound event to know when bindings
   // have resolved and content has been stamped to the page
   app.addEventListener('dom-change', function() {
-    console.log('Our app is ready to rock!');
-    if (false) { //check if user is signed in
+    console.log('Ready');
+    if (new window.auther("token").c.get("clientToken")) { //check if user is signed in
+      //app init
+      window.auth=new window.auther("token");
 
     } else {
-      new tabs("signin");
+      /*var w=*/new tabs("signin");
+      require('nw.gui').Window.get().close();
+      /*w.on("close", function() {
+        setTimeout(function() {
+          require('nw.gui').App.closeAllWindows();
+        },250);
+      });*/
     }
   });
 

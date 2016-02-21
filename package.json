@@ -53,8 +53,12 @@
   },
   "homepage": "https://github.com/mkg20001/mc-launch#readme",
   "dependencies": {
+    "java": "^0.6.0",
+    "mkdirp": "^0.5.1",
     "nw-builder": "^2.2.0",
     "path": "^0.12.7",
-    "prismarine-yggdrasil": "github:prismarinejs/prismarine-yggdrasil"
+    "prismarine-yggdrasil": "github:prismarinejs/prismarine-yggdrasil",
+    "request": "^2.69.0",
+    "uuid": "^2.0.1"
   }
 }

@@ -82,7 +82,22 @@
     <paper-toast id="toast">
       <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span>
     </paper-toast>
+    <template is="dom-if" if="{{tabs}}">
+      <div style="position:fixed;top:0px;left:0px;width:100%;height:100%;background-color:lightblue;">
+        <paper-toolbar class="tall">
+          <span class="space"></span>
+          <window-controls></window-controls>
+        </paper-toolbar>
+      </div>
+      <paper-material elevation="2" style="position:fixed;top:7%;left:10%;width:75%;height:75%;">
+        <iron-pages attr-for-selected="tab-name" selected="{{tab}}">
+          <section tab-name="signin">
+            <sign-in></sign-in>
+          </section>
+        </iron-pages>
+      </paper-material>
 
+    </template>
   </template>
 
   <!-- build:js scripts/app.js -->
