@@ -51,14 +51,13 @@
       <!-- Main Area -->
       <paper-scroll-header-panel main id="headerPanelMain">
         <!-- Main Toolbar -->
-        <paper-toolbar id="mainToolbar">
+        <paper-toolbar id="mainToolbar" class="drag-only">
           <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
 
           <span class="space"></span>
 
           <!-- Toolbar icons -->
-          <paper-icon-button icon="refresh"></paper-icon-button>
-          <paper-icon-button icon="search"></paper-icon-button>
+          <window-controls></window-controls>
 
           <!-- Application name -->
           <div class="middle middle-container">

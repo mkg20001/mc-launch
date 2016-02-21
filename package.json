@@ -17,6 +17,7 @@
   ],
   "window": {
     "toolbar": false,
+    "frame": false,
     "width": 900,
     "height": 700
   },
@@ -53,6 +54,7 @@
   "homepage": "https://github.com/mkg20001/mc-launch#readme",
   "dependencies": {
     "nw-builder": "^2.2.0",
+    "path": "^0.12.7",
     "prismarine-yggdrasil": "github:prismarinejs/prismarine-yggdrasil"
   }
 }

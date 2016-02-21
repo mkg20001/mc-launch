@@ -1,0 +1,55 @@
+<link rel="import" href="../bower_components/paper-styles/typography.html">
+
+<dom-module id="window-controls">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+      paper-icon-button {
+        -webkit-app-region: no-drag;
+      }
+    </style>
+
+    <paper-icon-button icon="close" on-click="close"></paper-icon-button>
+    <paper-icon-button icon="remove" on-click="mini"></paper-icon-button>
+    <paper-icon-button icon="image:crop-square" on-click="maxi"></paper-icon-button>
+
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'window-controls',
+
+        properties: {
+        },
+        win:require('nw.gui').Window.get(),
+        mini:function() {
+          this.win.minimize();
+        },
+        max:false,
+        close:function() {
+          window.close();
+        },
+        maximize:function() {
+          this.set("max",true);
+          this.win.maximize();
+        },
+        unmaximize:function() {
+          this.win.unmaximize();
+          this.set("max",false);
+        },
+        maxi:function() {
+          if (this.max) {
+            this.unmaximize();
+          } else {
+            this.maximize();
+          }
+        }
+      });
+    })();
+  </script>
+</dom-module>
