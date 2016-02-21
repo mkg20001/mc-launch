@@ -1,3 +1,10 @@
+if (window.location.href.split("?tab=")[1]) {
+  var app = document.querySelector('#app');
+  var tab=window.location.href.split("?tab=")[1];
+  app.addEventListener('dom-change', function() {
+    console.log("open tab:",tab);
+  });
+} else {
 (function(document) {
   'use strict';
 
@@ -9,6 +16,8 @@
   // Sets app default base URL
   //app.baseUrl = window.location.href;
   app.baseUrl="/";
+  app.baseLoc=window.location.href;
+  window.app=app;
 
   app.displayInstalledToast = function() {
     // Check to make sure caching is actually enabled—it won't be in the dev environment.
@@ -21,6 +30,11 @@
   // have resolved and content has been stamped to the page
   app.addEventListener('dom-change', function() {
     console.log('Our app is ready to rock!');
+    if (false) { //check if user is signed in
+
+    } else {
+      new tabs("signin");
+    }
   });
 
   // See https://github.com/Polymer/polymer/issues/1381
@@ -38,3 +52,4 @@
   };
 
 })(document);
+}
