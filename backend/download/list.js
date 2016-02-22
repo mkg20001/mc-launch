@@ -1,10 +1,21 @@
 const download=require("./download");
 
-function list(name,c) {
+function list(name) {
   if (!name) name="Download";
   var running=false;
   var qu=[];
   var drain=false;
+  var doing=false;
+  var cb=[];
+  function ddr() {
+    while(cb.length>0) {
+      try {
+        cb.pop()();
+      } catch(e) {
+        console.log("[LIST] callback error: "+e);
+      }
+    }
+  }
   function que() {
     running=true;
     var n=qu.pop();
@@ -15,17 +26,43 @@ function list(name,c) {
       } else {
         running=false;
         if (drain) {
-          c();
+          ddr();
         }
       }
     });
   }
+  function start() {
+    doing=true;
+    if (!running && doing) {
+      running=true;
+      process.nextTick(function() {
+        que();
+      });
+    }
+    return true;
+  }
   function attach(data,path,c) {
+    if (drain) {
+      return false;
+    }
     qu.push({data:data,path:path,c:c});
-    if (!running) {
-      que();
+    if (!running && doing) {
+      running=true;
+      process.nextTick(function() {
+        que();
+      });
+    }
+    return true;
+  }
+  function draining(cal) {
+    drain=true;
+    if (typeof cal=="function") {
+      cb.push(cal);
+    }
+    if (!running && doing) {
+      ddr();
     }
   }
-  return {a:attach};
+  return {a:attach,s:start,d:draining};
 }
 module.exports=list;

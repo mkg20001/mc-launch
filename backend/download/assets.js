@@ -1,5 +1,5 @@
 const j=require("../JSON");
-function assets(list,url,path) {
+function assets(list,url,path,c) {
   j(url.url,function(e,b) {
     var o=b.objects;
     for (var p in o) {
@@ -12,6 +12,11 @@ function assets(list,url,path) {
           console.log(pp.url+" : "+err);
         }
       });
+    }
+    try {
+      c();
+    } catch(e) {
+      
     }
   });
 }

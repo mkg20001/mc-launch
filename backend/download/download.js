@@ -5,8 +5,11 @@ const https = require('https');
 const mk = require("mkdirp");
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
-function match(path,sha) {
+function match(path,sha,size) {
   try {
+    if (size) {
+      return (fs.statSync(path).size==size);
+    }
     return (sha1(fs.readFileSync(path))==sha);
   } catch(e) {
     return false;
@@ -24,7 +27,7 @@ function download(data,path,c) {
   } else {
     to=path;
   }
-  if (match(to,data.sha1)) {
+  if (match(to,data.sha1,data.size)) {
     //file exists
     console.log("[SKIP] "+to);
     c();

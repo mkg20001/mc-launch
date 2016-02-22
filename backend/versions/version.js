@@ -2,10 +2,15 @@ const j=require("../JSON");
 const installer=require("../install");
 
 function vvv(v,b) {
-  function install(path) {
-    return new installer(b,path);
+  function install(path,c) {
+    return new installer(b,path,c);
   }
-  return {v:v,d:b,install:install};
+  function launch(path,user,c) {
+    return new installer(b,path,function(game) {
+      game.launch(user);
+    });
+  }
+  return {v:v,d:b,install:install,launch:launch};
 }
 
 function version(data,c) {
