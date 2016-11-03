@@ -1,12 +1,11 @@
-require('nw.gui').Window.get().showDevTools();
 const fs=require("fs");
 const pt=require("path");
 const mk=require("mkdirp");
 const uuid=require("uuid").v4;
 const os=require("os");
-os.homedir=function() {
-  return fs.readFileSync("/tmp/myhome").toString();
-};
+const electron=require("electron");
+const BrowserWindow = electron.remote.BrowserWindow;
+const url = require('url')
 switch(os.platform()) {
   case "linux":
     window.mcpath=pt.normalize(os.homedir()+"/.local/share/mc-launch");
@@ -124,8 +123,9 @@ window.auther=function auther(file) {
   return {auth:auth,a:auth,conf:conf,c:conf};
 };
 
-const gui = require('nw.gui');
-
 window.tabs=function(tab) {
-  return gui.Window.open(app.baseLoc+"?tab="+tab,{toolbar:false,frame:false});
+  var w=new BrowserWindow({width:400,height:400});
+  w.webContents.openDevTools()
+  w.loadURL(app.baseLoc+"?tab="+tab);
+  return w;
 };

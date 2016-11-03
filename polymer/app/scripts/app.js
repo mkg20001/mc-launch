@@ -34,10 +34,9 @@ if (window.location.href.split("?tab=")[1]) {
     if (new window.auther("token").c.get("clientToken")) { //check if user is signed in
       //app init
       window.auth=new window.auther("token");
-
     } else {
       /*var w=*/new tabs("signin");
-      require('nw.gui').Window.get().close();
+      require('electron').remote.getCurrentWindow().close();
       /*w.on("close", function() {
         setTimeout(function() {
           require('nw.gui').App.closeAllWindows();

@@ -5,3 +5,5 @@ bower_components
 build
 cache
 production_modules/
+
+npm-debug.log

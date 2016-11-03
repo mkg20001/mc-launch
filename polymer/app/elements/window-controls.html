@@ -26,24 +26,24 @@
 
         properties: {
         },
-        win:require('nw.gui').Window.get(),
+        win:require('electron').remote.getCurrentWindow(),
+        ready:() => {
+          console.log("READY")
+        },
         mini:function() {
           this.win.minimize();
         },
-        max:false,
         close:function() {
           this.win.close();
         },
         maximize:function() {
-          this.set("max",true);
           this.win.maximize();
         },
         unmaximize:function() {
           this.win.unmaximize();
-          this.set("max",false);
         },
         maxi:function() {
-          if (this.max) {
+          if (win.isMaximized()) {
             this.unmaximize();
           } else {
             this.maximize();
