@@ -5,7 +5,9 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -55,6 +57,8 @@
     "request": "^2.76.0",
     "sha1": "^1.1.1",
     "unzip": "^0.1.11",
-    "uuid": "^2.0.3"
-  }
+    "uuid": "^2.0.3",
+    "snyk": "^1.286.1"
+  },
+  "snyk": true
 }
