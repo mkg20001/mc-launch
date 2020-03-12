@@ -49,7 +49,7 @@
   "dependencies": {
     "electron": "^1.4.5",
     "java": "^0.7.2",
-    "mkdirp": "^0.5.1",
+    "mkdirp": "^1.0.0",
     "path": "^0.12.7",
     "prismarine-yggdrasil": "github:prismarinejs/prismarine-yggdrasil",
     "request": "^2.76.0",
