@@ -48,7 +48,7 @@
   "homepage": "https://github.com/mkg20001/mc-launch#readme",
   "dependencies": {
     "electron": "^1.4.5",
-    "java": "^0.7.2",
+    "java": "^5.0.0",
     "mkdirp": "^0.5.1",
     "path": "^0.12.7",
     "prismarine-yggdrasil": "github:prismarinejs/prismarine-yggdrasil",
