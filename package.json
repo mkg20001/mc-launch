@@ -47,7 +47,7 @@
   },
   "homepage": "https://github.com/mkg20001/mc-launch#readme",
   "dependencies": {
-    "electron": "^1.4.5",
+    "electron": "^10.4.7",
     "java": "^0.7.2",
     "mkdirp": "^0.5.1",
     "path": "^0.12.7",
